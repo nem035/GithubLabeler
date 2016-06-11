@@ -13,6 +13,10 @@ const {
   parse: qsParse,
 } = QS;
 
+const {
+  localStorage: cache,
+} = window;
+
 export default Router.extend({
   renderPage(pageComponent, opts = { layout: true }) {
     const { layout } = opts;
@@ -29,6 +33,7 @@ export default Router.extend({
     repos: 'repos',
     login: 'login',
     'auth/callback?:queryString': 'authCallback',
+    logout: 'logout',
   },
 
   home() {
@@ -57,6 +62,12 @@ export default Router.extend({
       json: true,
     }, (err, req, { token }) => {
       app.user.token = token;
+      this.redirectTo('/repos');
     });
+  },
+
+  logout() {
+    cache.clear();
+    window.location = '/';
   },
 });
