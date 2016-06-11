@@ -1,10 +1,12 @@
 import Model from 'ampersand-model';
+import GithubAuthMixin from '../helpers/github-auth-mixin';
+import RepoCollection from './repo-collection';
 
 const {
   localStorage: cache,
 } = window;
 
-export default Model.extend({
+export default Model.extend(GithubAuthMixin, {
   url: 'https://api.github.com/user',
 
   // persisting between client and server
@@ -17,6 +19,11 @@ export default Model.extend({
   // persisting only on the client
   session: {
     token: 'string',
+  },
+
+  // link to a model of a collection of repos
+  collections: {
+    repos: RepoCollection
   },
 
   // load token from cache and
@@ -34,17 +41,10 @@ export default Model.extend({
     this.fetchData();
   },
 
-  ajaxConfig() {
-    return {
-      headers: {
-        Authorization: `token ${this.token}`,
-      },
-    };
-  },
-
   fetchData() {
     if (this.token) {
       this.fetch();
+      this.repos.fetch();
     }
   },
 });

@@ -2,7 +2,7 @@ import Router from 'ampersand-router';
 import React from 'react';
 import QS from 'qs';
 import xhr from 'xhr';
-import app from './app';
+import app from 'ampersand-app';
 import NavHelper from './components/nav-helper';
 import Layout from './layout';
 import HomePage from './pages/home';
@@ -22,7 +22,7 @@ export default Router.extend({
     const { layout } = opts;
 
     // wrap pages in a layout based on a flag
-    const pageContent = layout ? <Layout>{pageComponent}</Layout> : pageComponent;
+    const pageContent = layout ? <Layout user={app.user}>{pageComponent}</Layout> : pageComponent;
 
     // wrap every page in the NavHelper to always handle local links
     React.render(<NavHelper>{pageContent}</NavHelper>, document.body);
@@ -41,7 +41,7 @@ export default Router.extend({
   },
 
   repos() {
-    this.renderPage(<ReposPage />);
+    this.renderPage(<ReposPage repos={app.user.repos}/>);
   },
 
   login() {
