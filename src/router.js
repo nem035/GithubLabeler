@@ -1,9 +1,15 @@
 import Router from 'ampersand-router';
 import React from 'react';
+import QS from 'qs';
 import NavHelper from './components/nav-helper';
 import Layout from './layout';
 import HomePage from './pages/home';
 import ReposPage from './pages/repos';
+
+const {
+  stringify: qsStringify,
+  parse: qsParse,
+} = QS;
 
 const {
   body,
@@ -23,6 +29,8 @@ export default Router.extend({
   routes: {
     '': 'home',
     repos: 'repos',
+    login: 'login',
+    'auth/callback?:queryString': 'authCallback',
   },
 
   home() {
@@ -31,5 +39,21 @@ export default Router.extend({
 
   repos() {
     this.renderPage(<ReposPage />);
+  },
+
+  login() {
+    const clientId = '287e3117679dac51e201';
+    const redirectUri = `${window.location.origin}/auth/callback`;
+    const queryString = qsStringify({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      scope: 'user, repo',
+    });
+    window.location = `https://github.com/login/oauth/authorize?${queryString}`;
+  },
+
+  authCallback(queryString) {
+    const data = qsParse(queryString);
+    console.debug(data);
   },
 });
