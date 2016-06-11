@@ -6,35 +6,23 @@ import HomePage from './pages/home';
 import ReposPage from './pages/repos';
 
 const {
-  body
+  body,
 } = document;
 
 export default Router.extend({
-  renderPage(page, opts = { layout: true }) {
+  renderPage(pageComponent, opts = { layout: true }) {
     const { layout } = opts;
 
-    // wrap pages in a layout by default
-    if (layout) {
-      page = (
-        <Layout>
-          {page}
-        </Layout>
-      );
-    }
+    // wrap pages in a layout based on a flag
+    const pageContent = layout ? <Layout>{pageComponent}</Layout> : pageComponent;
 
     // wrap every page in the NavHelper to always handle local links
-    page = (
-      <NavHelper>
-        {page}
-      </NavHelper>
-    );
-    
-    React.render(page, body);
+    React.render(<NavHelper>{pageContent}</NavHelper>, body);
   },
 
   routes: {
     '': 'home',
-    'repos': 'repos'
+    repos: 'repos',
   },
 
   home() {
@@ -43,5 +31,5 @@ export default Router.extend({
 
   repos() {
     this.renderPage(<ReposPage />);
-  }
+  },
 });

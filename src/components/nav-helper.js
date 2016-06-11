@@ -1,9 +1,10 @@
 import React from 'react';
 import localLinks from 'local-links';
+import app from 'ampersand-app';
 
 export default React.createClass({
   displayName: 'NavHelper',
-  
+
   onClick(event) {
     const pathName = localLinks.getLocalPathname(event);
     if (pathName) {
@@ -14,10 +15,10 @@ export default React.createClass({
 
   render() {
     return (
-      <div onClick={this.onClick}>
+      <div {...this.props} onClick={this.onClick}>
         {this.props.children}
       </div>
     );
-  }
+  },
 
 });

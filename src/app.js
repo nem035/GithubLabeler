@@ -1,7 +1,10 @@
 import Router from './router';
 import Styles from './styles/main.styl';
+import app from 'ampersand-app';
 
-window.app = {
+// initialize the app singleton
+
+app.extend({
   init() {
     this.router = new Router();
 
@@ -9,6 +12,8 @@ window.app = {
     // and install routing logic
     this.router.history.start();
   }
-};
+});
 
-window.app.init();
+app.init();
+
+export default app;
