@@ -5,11 +5,10 @@ import User from './models/user';
 import Styles from './styles/main.styl';
 
 // initialize the app singleton
-
 app.extend({
   init() {
     this.user = new User();
-
+    this.user.fetchData();
     // create the router,
     // start tracking routing history
     // and install routing logic
@@ -19,5 +18,8 @@ app.extend({
 });
 
 app.init();
+
+// For debugging purposes
+window.app = app;
 
 export default app;
