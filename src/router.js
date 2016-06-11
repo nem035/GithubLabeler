@@ -1,6 +1,8 @@
 import Router from 'ampersand-router';
 import React from 'react';
 import QS from 'qs';
+import xhr from 'xhr';
+import app from './app';
 import NavHelper from './components/nav-helper';
 import Layout from './layout';
 import HomePage from './pages/home';
@@ -11,10 +13,6 @@ const {
   parse: qsParse,
 } = QS;
 
-const {
-  body,
-} = document;
-
 export default Router.extend({
   renderPage(pageComponent, opts = { layout: true }) {
     const { layout } = opts;
@@ -23,7 +21,7 @@ export default Router.extend({
     const pageContent = layout ? <Layout>{pageComponent}</Layout> : pageComponent;
 
     // wrap every page in the NavHelper to always handle local links
-    React.render(<NavHelper>{pageContent}</NavHelper>, body);
+    React.render(<NavHelper>{pageContent}</NavHelper>, document.body);
   },
 
   routes: {
@@ -53,7 +51,12 @@ export default Router.extend({
   },
 
   authCallback(queryString) {
-    const data = qsParse(queryString);
-    console.debug(data);
+    const { code } = qsParse(queryString);
+    xhr({
+      url: `https://github-labeler-localhost.herokuapp.com/authenticate/${code}`,
+      json: true,
+    }, (err, req, { token }) => {
+      app.user.token = token;
+    });
   },
 });
