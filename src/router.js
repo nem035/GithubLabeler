@@ -7,6 +7,7 @@ import NavHelper from './components/nav-helper';
 import Layout from './layout';
 import HomePage from './pages/home';
 import ReposPage from './pages/repos';
+import RepoPage from './pages/repo';
 
 const {
   stringify: qsStringify,
@@ -31,6 +32,7 @@ export default Router.extend({
   routes: {
     '': 'home',
     repos: 'repos',
+    'repo/:owner/:name': 'repo',
     login: 'login',
     'auth/callback?:queryString': 'authCallback',
     logout: 'logout',
@@ -41,7 +43,12 @@ export default Router.extend({
   },
 
   repos() {
-    this.renderPage(<ReposPage repos={app.user.repos}/>);
+    this.renderPage(<ReposPage repos={app.user.repos} />);
+  },
+
+  repo(owner, name) {
+    const repo = app.user.repos.getByFullName(`${owner}/${name}`);
+    this.renderPage(<RepoPage repo={repo} />);
   },
 
   login() {

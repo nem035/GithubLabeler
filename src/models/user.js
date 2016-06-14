@@ -1,4 +1,5 @@
 import Model from 'ampersand-model';
+import app from 'ampersand-app';
 import GithubAuthMixin from '../helpers/github-auth-mixin';
 import RepoCollection from './repo-collection';
 
@@ -7,7 +8,9 @@ const {
 } = window;
 
 export default Model.extend(GithubAuthMixin, {
-  url: 'https://api.github.com/user',
+  url() {
+    return `${app.baseURL}/user`;
+  },
 
   // persisting between client and server
   props: {

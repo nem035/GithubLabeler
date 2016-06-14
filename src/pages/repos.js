@@ -10,7 +10,8 @@ export default React.createClass({
 
     const reposList = repos.map(repo => (
       <li key={repo.id}>
-        <a href="">{repo.full_name}</a>
+        <span className="octicon octicon-repo"></span>
+        <a href={repo.appUrl}> {repo.full_name}</a>
       </li>
     ));
 
