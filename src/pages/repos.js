@@ -9,7 +9,7 @@ export default React.createClass({
     const { repos } = this.props;
 
     const reposList = repos.map(repo => (
-      <li>
+      <li key={repo.id}>
         <a href="">{repo.full_name}</a>
       </li>
     ));
