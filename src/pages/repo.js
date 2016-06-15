@@ -1,5 +1,6 @@
 import React from 'react';
 import ampersandMixin from 'ampersand-react-mixin';
+import Label from '../components/label';
 
 export default React.createClass({
   displayName: 'Repo',
@@ -8,11 +9,7 @@ export default React.createClass({
   render() {
     const { repo, labels } = this.props;
 
-    const labelsList = labels.map(label => (
-      <li key={label.name}>
-        {label.name} : {label.color}
-      </li>
-    ));
+    const labelsList = labels.map(label => <Label label={label} />);
 
     return (
       <div className="container">
