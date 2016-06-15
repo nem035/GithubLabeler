@@ -7,5 +7,5 @@ export default Collection.extend(GithubAuthMixin, {
     return `${this.parent.url()}/labels`;
   },
 
-  model: Label
+  model: Label,
 });

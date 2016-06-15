@@ -12,6 +12,7 @@ app.extend({
 
     this.user = new User();
     this.user.fetchData();
+    
     // create the router,
     // start tracking routing history
     // and install routing logic

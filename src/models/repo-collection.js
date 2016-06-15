@@ -10,10 +10,10 @@ export default Collection.extend(GithubAuthMixin, {
   model: Repo,
 
   getByFullName(fullName) {
-    const model = this.findWhere({ full_name: fullName });
+    let model = this.findWhere({ full_name: fullName });
 
     if (!model) {
-      return new Repo({
+      model = new Repo({
         full_name: fullName,
       });
     }

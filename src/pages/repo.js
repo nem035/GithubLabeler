@@ -6,13 +6,21 @@ export default React.createClass({
   mixins: [ampersandMixin],
 
   render() {
-    const { repo } = this.props;
+    const { repo, labels } = this.props;
+
+    const labelsList = labels.map(label => (
+      <li key={label.name}>
+        {label.name} : {label.color}
+      </li>
+    ));
 
     return (
       <div className="container">
         <h1>{repo.full_name}</h1>
         <p></p>
-        <ul></ul>
+        <ul>
+          {labelsList}
+        </ul>
       </div>
     );
   },
