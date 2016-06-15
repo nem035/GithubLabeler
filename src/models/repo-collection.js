@@ -1,11 +1,10 @@
 import Collection from 'ampersand-rest-collection';
-import app from 'ampersand-app';
 import Repo from './repo';
 import GithubAuthMixin from '../helpers/github-auth-mixin';
 
 export default Collection.extend(GithubAuthMixin, {
   url() {
-    return `${app.baseURL}/user/repos`;
+    return `${this.parent.url()}/repos`;
   },
 
   model: Repo,
