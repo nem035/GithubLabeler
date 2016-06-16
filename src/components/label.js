@@ -33,13 +33,13 @@ export default React.createClass({
           <input name="color" />
           <button
             type="submit"
-            className="button button-small"
+            className="button button-small button-approve"
           >
             Save
           </button>
           <button
             type="button"
-            className="button button-small button-unstyled"
+            className="button button-small button-neutral"
             onClick={this.onCancelClick}
           >
             Cancel
