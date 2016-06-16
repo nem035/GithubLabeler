@@ -7,7 +7,7 @@
     "build": "webpack",
     "deploy": "npm run github && surge -p public -d labelr.surge.sh",
     "start": "webpack-dev-server",
-    "github": "npm run build && git add --all && git commit -am \"$(date)\" && npm version minor && git push origin gh-pages --tags"
+    "github": "npm run build && git add --all && git commit -am \"$(date)\" && npm version patch && git push origin gh-pages --tags"
   },
   "author": "Nemanja Stojanovic",
   "license": "MIT",
