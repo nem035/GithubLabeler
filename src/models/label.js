@@ -9,5 +9,12 @@ export default Model.extend(GithubAuthMixin, {
   props: {
     name: 'string',
     color: 'string',
-  }
+  },
+
+  session: {
+    isEditing: {
+      type: 'boolean',
+      default: false,
+    },
+  },
 });

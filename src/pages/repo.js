@@ -9,7 +9,9 @@ export default React.createClass({
   render() {
     const { repo, labels } = this.props;
 
-    const labelsList = labels.map(label => <Label label={label} />);
+    const labelsList = labels.map(label => (
+      <Label key={label.name} label={label} />
+    ));
 
     return (
       <div className="container">
