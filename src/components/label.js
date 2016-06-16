@@ -45,7 +45,10 @@ export default React.createClass({
             className="octicon octicon-pencil"
             onClick={this.onEditClick}
           />
-          <span className="octicon octicon-x"/>
+          <span
+            className="octicon octicon-x"
+            onClick={this.onDeleteClick}
+          />
         </div>
       );
     }
@@ -58,5 +61,9 @@ export default React.createClass({
 
   onCancelClick() {
     this.props.label.isEditing = false;
+  },
+
+  onDeleteClick() {
+    //
   }
 });

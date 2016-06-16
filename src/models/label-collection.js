@@ -1,8 +1,7 @@
-import Collection from 'ampersand-rest-collection';
+import AuthCollection from '../helpers/auth-collection';
 import Label from './label';
-import GithubAuthMixin from '../helpers/github-auth-mixin';
 
-export default Collection.extend(GithubAuthMixin, {
+export default AuthCollection.extend({
   url() {
     return `${this.parent.url()}/labels`;
   },

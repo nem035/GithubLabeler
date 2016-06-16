@@ -1,9 +1,8 @@
-import Model from 'ampersand-model';
 import app from 'ampersand-app';
-import GithubAuthMixin from '../helpers/github-auth-mixin';
+import AuthModel from '../helpers/auth-model';
 import LabelCollection from './label-collection';
 
-export default Model.extend(GithubAuthMixin, {
+export default AuthModel.extend({
   url() {
     return `${app.baseURL}/repos/${this.full_name}`;
   },
@@ -30,7 +29,7 @@ export default Model.extend(GithubAuthMixin, {
 
   // override the Model fetch method
   fetch(...args) {
-    Model.prototype.fetch.apply(this, args);
+    AuthModel.prototype.fetch.apply(this, args);
     this.labels.fetch();
   },
 });

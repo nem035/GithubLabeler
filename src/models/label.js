@@ -1,10 +1,11 @@
-import Model from 'ampersand-model';
-import GithubAuthMixin from '../helpers/github-auth-mixin';
+import AuthModel from '../helpers/auth-model';
 
-export default Model.extend(GithubAuthMixin, {
+export default AuthModel.extend({
   url() {
     return `${this.parent.url()}/labels/${this.name}`;
   },
+
+  idAttribute: 'name',
 
   props: {
     name: 'string',
