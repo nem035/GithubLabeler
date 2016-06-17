@@ -35,12 +35,20 @@ export default React.createClass({
 
   onCancelClick(event) {
     event.preventDefault();
-    this.setState(this.getInitialState());
+
+    const { label } = this.props;
+
+    if (label.isSaved) {
+      label.isEditing = false;
+      this.setState(this.getInitialState());
+    } else {
+      label.destroy();
+    }
   },
 
   onDeleteClick(event) {
     event.preventDefault();
-    this.props.label.destroy(); // can pass { wait: true } // don't remove this label until the DELETE is successful
+    this.props.label.destroy(); // can pass { wait: true } which means don't remove this label until the DELETE is successful
   },
 
   onSubmit(event) {
@@ -51,7 +59,11 @@ export default React.createClass({
     if (label.isSaved) {
       label.update(this.state);
     } else {
-      label.save(this.state);
+      label.save(this.state, {
+        success() {
+          label.isSaved = true;
+        },
+      });
     }
 
     label.isEditing = false;
@@ -61,6 +73,7 @@ export default React.createClass({
     const { label } = this.props;
     const { name, color } = this.state;
     const backgroundColor = `#${color}`;
+    const cannotSave = !name || !color;
 
     let content;
     if (label.isEditing) {
@@ -84,6 +97,7 @@ export default React.createClass({
           />
           <button
             type="submit"
+            disabled={cannotSave}
             className="button button-small button-approve"
           >
             Save
