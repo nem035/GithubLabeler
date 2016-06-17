@@ -18,10 +18,10 @@ export default AuthModel.extend({
   },
 
   update(attrs) {
-    const oldAttrs = this.attributes;
+    const oldAttrs = this.getAttributes({ props: true, session: false });
 
     authXHR({
-      url: this.url(),
+      url: this.url(), // implied from the LabelsCollection using a rest structures: 'labels/:name'
       json: attrs,
       method: 'PATCH',
     }, (err) => {
