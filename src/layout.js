@@ -12,6 +12,12 @@ export default React.createClass({
       children,
     } = this.props;
 
+    const {
+      html_url: repoUrl,
+      avatar_url: avatarUrl,
+      login: userName
+    } = user;
+
     return (
       <div>
         <nav className="top-nav top-nav-light cf" role="navigation">
@@ -21,16 +27,17 @@ export default React.createClass({
             <li><a href="/">Home</a></li>
             <li><a href="/repos">Repos</a></li>
             <li className="pull-right">
-              <a href={user.html_url} target="_blank">
+              <a href={repoUrl} target="_blank">
                 <img
-                  className="avatar"
-                  alt="avatar"
-                  src={user.avatar_url}
+                  className="avatar avatar-small avatar-rounded"
+                  alt="User Avatar"
+                  src={avatarUrl}
+                  title="Profile"
                   width="40"
                   height="40"
                 />
               </a>
-              {user.login}
+              {userName}
               &nbsp;
               <a href="/logout">Logout</a>
             </li>
