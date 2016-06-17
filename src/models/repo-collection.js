@@ -1,4 +1,4 @@
-import AuthCollection from '../helpers/auth-collection';
+import AuthCollection from '../auth/collection';
 import Repo from './repo';
 
 export default AuthCollection.extend({

@@ -9,7 +9,7 @@ export default React.createClass({
     const { repos } = this.props;
 
     const reposList = repos.map(repo => (
-      <li key={repo.id}>
+      <li key={repo.id} className="fade-in">
         <span className="octicon octicon-repo"></span>
         <a href={repo.appUrl}> {repo.full_name}</a>
       </li>

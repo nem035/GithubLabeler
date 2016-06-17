@@ -1,13 +1,17 @@
 {
   "name": "github-labeler",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "deploy": "surge -p public -d labelr.surge.sh",
-    "start": "webpack-dev-server",
-    "yolo": "git add --all && git commit -am \"$(date)\" && npm version minor && git push origin master --tags && npm run build && npm run deploy"
+    "deploy": "npm run github && surge -p public -d labelr.surge.sh",
+    "git": "npm run build && git add --all && git commit -am \"$(date)\"",
+    "major": "npm run git && npm version major && npm run push",
+    "minor": "npm run git && npm version minor && npm run push",
+    "patch": "npm run git && npm version patch && npm run push",
+    "push": "git push origin master --tags",
+    "start": "webpack-dev-server"
   },
   "author": "Nemanja Stojanovic",
   "license": "MIT",

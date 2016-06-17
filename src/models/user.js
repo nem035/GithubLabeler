@@ -1,5 +1,5 @@
 import app from 'ampersand-app';
-import AuthModel from '../helpers/auth-model';
+import AuthModel from '../auth/model';
 import RepoCollection from './repo-collection';
 
 const {
@@ -16,6 +16,7 @@ export default AuthModel.extend({
     id: 'number',
     login: 'string',
     avatar_url: 'string',
+    html_url: 'string',
   },
 
   // persisting only on the client

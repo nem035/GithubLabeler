@@ -5,6 +5,29 @@ export default React.createClass({
   displayName: 'Label',
   mixins: [ampersandMixin],
 
+  getInitialState() {
+    const { name, color } = this.props.label;
+
+    return {
+      name,
+      color,
+    };
+  },
+
+  onNameChange({ target }) {
+    const name = target.value;
+    this.setState({
+      name,
+    });
+  },
+
+  onColorChange({ target }) {
+    const color = target.value.slice(1); // remove #
+    this.setState({
+      color,
+    });
+  },
+
   onEditClick(event) {
     event.preventDefault();
     this.props.label.isEditing = true;
@@ -12,7 +35,7 @@ export default React.createClass({
 
   onCancelClick(event) {
     event.preventDefault();
-    this.props.label.isEditing = false;
+    this.setState(this.getInitialState());
   },
 
   onDeleteClick(event) {
@@ -20,17 +43,38 @@ export default React.createClass({
     this.props.label.destroy(); // can pass { wait: true } // don't remove this label until the DELETE is successful
   },
 
+  onSubmit(event) {
+    event.preventDefault();
+    const { label } = this.props;
+    label.update(this.state);
+    label.isEditing = false;
+  },
+
   render() {
     const { label } = this.props;
-    const backgroundColor = `#${label.color}`;
+    const { name, color } = this.state;
+    const backgroundColor = `#${color}`;
 
     let content;
     if (label.isEditing) {
       content = (
-        <form className="label">
-          <span className="label-color avatar avatar-small avatar-rounded">&nbsp;</span>
-          <input name="name" />
-          <input name="color" />
+        <form onSubmit={this.onSubmit} className="label fade-in">
+          <span
+            className="label-color avatar avatar-small avatar-rounded"
+            style={{ backgroundColor }}
+          >
+            &nbsp;
+          </span>
+          <input
+            name="name"
+            value={name}
+            onChange={this.onNameChange}
+          />
+          <input
+            name="color"
+            value={backgroundColor}
+            onChange={this.onColorChange}
+          />
           <button
             type="submit"
             className="button button-small button-approve"
@@ -48,20 +92,22 @@ export default React.createClass({
       );
     } else {
       content = (
-        <div className="label">
+        <div className="label fade-in">
           <span
             className="label-color"
             style={{ backgroundColor }}
           >
             &nbsp;
           </span>
-          <span>{label.name}</span>
+          <span>{name}</span>
           <span
             className="octicon octicon-pencil"
+            title="Edit"
             onClick={this.onEditClick}
           />
           <span
             className="octicon octicon-x"
+            title="Delete"
             onClick={this.onDeleteClick}
           />
         </div>

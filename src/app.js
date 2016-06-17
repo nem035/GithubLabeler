@@ -9,16 +9,15 @@ import icons from 'octicons/octicons/octicons.css';
 app.extend({
   init() {
     this.baseURL = 'https://api.github.com';
-
     this.user = new User();
     this.user.fetchData();
-    
+
     // create the router,
     // start tracking routing history
     // and install routing logic
     this.router = new Router();
     this.router.history.start();
-  },
+  }
 });
 
 app.init();
