@@ -16,6 +16,7 @@ export default AuthModel.extend({
     id: 'number',
     login: 'string',
     avatar_url: 'string',
+    html_url: 'string',
   },
 
   // persisting only on the client
