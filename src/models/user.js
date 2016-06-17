@@ -24,9 +24,21 @@ export default AuthModel.extend({
     token: 'string',
   },
 
+  // derived properties
+  derived: {
+    isLoggedIn: {
+      deps: ['token'],
+      fn() {
+        const { token: userToken } = this;
+        const { token: cachedToken } = cache;
+        return !!userToken || !!cachedToken;
+      },
+    },
+  },
+
   // link to a model of a collection of repos
   collections: {
-    repos: RepoCollection
+    repos: RepoCollection,
   },
 
   // load token from cache and

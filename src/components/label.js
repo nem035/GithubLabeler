@@ -22,7 +22,10 @@ export default React.createClass({
   },
 
   onColorChange({ target }) {
-    const color = target.value.slice(1); // remove #
+    const color = target.value
+      .slice(1) // remove #
+      .replace(/\W+/g, ''); // remove non-alphanumerics
+
     this.setState({
       color,
     });

@@ -5,6 +5,10 @@ import User from './models/user';
 import styles from './styles/main.styl';
 import icons from 'octicons/octicons/octicons.css';
 
+const {
+  localStorage: cache
+} = window;
+
 // initialize the app singleton
 app.extend({
   init() {

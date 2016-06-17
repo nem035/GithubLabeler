@@ -8,6 +8,7 @@ import Layout from './layout';
 import HomePage from './pages/home';
 import ReposPage from './pages/repos';
 import RepoPage from './pages/repo';
+import authRoute from './auth/route';
 
 const {
   stringify: qsStringify,
@@ -31,8 +32,8 @@ export default Router.extend({
 
   routes: {
     '': 'home',
-    repos: 'repos',
-    'repo/:owner/:name': 'repo',
+    repos: authRoute('repos'),
+    'repo/:owner/:name': authRoute('repo'),
     login: 'login',
     'auth/callback?:queryString': 'authCallback',
     logout: 'logout',
@@ -48,7 +49,7 @@ export default Router.extend({
 
   repo(owner, name) {
     const repo = app.user.repos.getByFullName(`${owner}/${name}`);
-    this.renderPage(<RepoPage repo={repo} labels={repo.labels}/>);
+    this.renderPage(<RepoPage repo={repo} labels={repo.labels} />);
   },
 
   login() {
@@ -74,7 +75,7 @@ export default Router.extend({
   },
 
   logout() {
-    cache.clear();
+    cache.token = '';
     window.location = '/';
   },
 });

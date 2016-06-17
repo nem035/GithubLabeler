@@ -5,7 +5,7 @@ export default React.createClass({
   displayName: 'Home',
 
   render() {
-    const isLoggedIn = !!app.user.token;
+    const { isLoggedIn } = app.user;
 
     let content;
     if (isLoggedIn) {
