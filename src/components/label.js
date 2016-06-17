@@ -43,6 +43,13 @@ export default React.createClass({
     this.props.label.destroy(); // can pass { wait: true } // don't remove this label until the DELETE is successful
   },
 
+  onSubmit(event) {
+    event.preventDefault();
+    const { label } = this.props;
+    label.update(this.state);
+    label.isEditing = false;
+  },
+
   render() {
     const { label } = this.props;
     const { name, color } = this.state;
@@ -51,7 +58,7 @@ export default React.createClass({
     let content;
     if (label.isEditing) {
       content = (
-        <form className="label fade-in">
+        <form onSubmit={this.onSubmit} className="label fade-in">
           <span
             className="label-color avatar avatar-small avatar-rounded"
             style={{ backgroundColor }}

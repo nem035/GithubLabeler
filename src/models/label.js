@@ -18,10 +18,20 @@ export default AuthModel.extend({
   },
 
   update(attrs) {
+    const oldAttrs = this.attributes;
+
     authXHR({
-      url: '', // TODO
+      url: this.url(),
       json: attrs,
       method: 'PATCH',
+    }, (err) => {
+      // if update didn't work, reset attributes
+      if (err) {
+        this.set(oldAttrs);
+      }
     });
+
+    // assume everything worked and update
+    this.set(attrs);
   },
 });
