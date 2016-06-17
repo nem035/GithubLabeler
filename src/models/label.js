@@ -21,6 +21,10 @@ export default AuthModel.extend({
     },
   },
 
+  isNew() {
+    return !this.isSaved;
+  },
+
   update(attrs) {
     const oldAttrs = this.getAttributes({ props: true, session: false });
 

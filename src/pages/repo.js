@@ -6,11 +6,14 @@ export default React.createClass({
   displayName: 'Repo',
   mixins: [ampersandMixin],
 
-  onClick() {
+  onNewLabelClick() {
+    // create a new label model
+    // in a non-saved state
     this.props.labels.add({
       name: '',
       color: '',
       isEditing: true,
+      isSaved: false,
     }, { at: 0 });
   },
 
@@ -28,7 +31,7 @@ export default React.createClass({
           <button
             type="button"
             className="button"
-            onClick={this.onClick}
+            onClick={this.onNewLabelClick}
           >
             New Label
           </button>

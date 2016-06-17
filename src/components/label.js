@@ -45,8 +45,15 @@ export default React.createClass({
 
   onSubmit(event) {
     event.preventDefault();
+
     const { label } = this.props;
-    label.update(this.state);
+
+    if (label.isSaved) {
+      label.update(this.state);
+    } else {
+      label.save(this.state);
+    }
+
     label.isEditing = false;
   },
 
