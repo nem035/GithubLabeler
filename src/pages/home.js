@@ -5,6 +5,23 @@ export default React.createClass({
   displayName: 'Home',
 
   render() {
+    const isLoggedIn = !!app.user.token;
+
+    let content;
+    if (isLoggedIn) {
+      content = (
+        <a href="/repos" className="button button-large">
+          Go to My Repos
+        </a>
+      );
+    } else {
+      content = (
+        <a href="/login" className="button button-large">
+          <span className="mega-octicon octicon-mark-github"></span> Login with GitHub
+        </a>
+      );
+    }
+
     return (
       <div className="container">
         <header role="banner">
@@ -12,9 +29,7 @@ export default React.createClass({
         </header>
         <div>
           <p>We label stuff for you, because, we can&trade;</p>
-          <a href="/login" className="button button-large">
-            <span className="mega-octicon octicon-mark-github"></span> Login with GitHub
-          </a>
+          {content}
         </div>
       </div>
     );
