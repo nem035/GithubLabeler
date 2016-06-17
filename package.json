@@ -10,7 +10,7 @@
     "major": "npm run git && npm version major && npm run push",
     "minor": "npm run git && npm version minor && npm run push",
     "patch": "npm run git && npm version patch && npm run push",
-    "push": "git push origin gh-pages --tags",
+    "push": "git push origin master --tags",
     "start": "webpack-dev-server"
   },
   "author": "Nemanja Stojanovic",
