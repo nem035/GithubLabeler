@@ -8,6 +8,7 @@ import Layout from './layout';
 import HomePage from './pages/home';
 import ReposPage from './pages/repos';
 import RepoPage from './pages/repo';
+import MessagePage from './pages/message';
 import authRoute from './auth/route';
 
 const {
@@ -37,6 +38,7 @@ export default Router.extend({
     login: 'login',
     'auth/callback?:queryString': 'authCallback',
     logout: 'logout',
+    '*404': 'fourOhFour'
   },
 
   home() {
@@ -72,10 +74,20 @@ export default Router.extend({
       app.user.token = token;
       this.redirectTo('/repos');
     });
+
+    this.renderPage(<MessagePage title="Logging in" />);
   },
 
   logout() {
     cache.token = '';
     window.location = '/';
   },
+
+  fourOhFour() {
+    this.renderPage(<MessagePage
+      title="Not Found"
+      body="Sorry, nothing here."
+      type="alert"
+    />);
+  }
 });
