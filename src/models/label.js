@@ -15,6 +15,10 @@ export default AuthModel.extend({
       type: 'boolean',
       default: false,
     },
+    isSaved: {
+      type: 'boolean',
+      default: true,
+    },
   },
 
   update(attrs) {
