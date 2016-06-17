@@ -51,7 +51,7 @@ export default React.createClass({
     let content;
     if (label.isEditing) {
       content = (
-        <form className="label">
+        <form className="label fade-in">
           <span
             className="label-color avatar avatar-small avatar-rounded"
             style={{ backgroundColor }}
@@ -85,7 +85,7 @@ export default React.createClass({
       );
     } else {
       content = (
-        <div className="label">
+        <div className="label fade-in">
           <span
             className="label-color"
             style={{ backgroundColor }}
@@ -95,10 +95,12 @@ export default React.createClass({
           <span>{name}</span>
           <span
             className="octicon octicon-pencil"
+            title="Edit"
             onClick={this.onEditClick}
           />
           <span
             className="octicon octicon-x"
+            title="Delete"
             onClick={this.onDeleteClick}
           />
         </div>
