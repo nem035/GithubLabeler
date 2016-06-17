@@ -9,7 +9,6 @@ import icons from 'octicons/octicons/octicons.css';
 app.extend({
   init() {
     this.baseURL = 'https://api.github.com';
-
     this.user = new User();
     this.user.fetchData();
 
@@ -18,7 +17,7 @@ app.extend({
     // and install routing logic
     this.router = new Router();
     this.router.history.start();
-  },
+  }
 });
 
 app.init();

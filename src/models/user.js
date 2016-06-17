@@ -1,5 +1,5 @@
 import app from 'ampersand-app';
-import AuthModel from '../helpers/auth-model';
+import AuthModel from '../auth/model';
 import RepoCollection from './repo-collection';
 
 const {

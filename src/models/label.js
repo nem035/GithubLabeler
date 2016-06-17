@@ -1,7 +1,8 @@
-import AuthModel from '../helpers/auth-model';
+import AuthModel from '../auth/model';
+import authXHR from '../auth/xhr';
 
 export default AuthModel.extend({
-  
+
   idAttribute: 'name',
 
   props: {
@@ -14,5 +15,13 @@ export default AuthModel.extend({
       type: 'boolean',
       default: false,
     },
+  },
+
+  update(attrs) {
+    authXHR({
+      url: '', // TODO
+      json: attrs,
+      method: 'PATCH',
+    });
   },
 });

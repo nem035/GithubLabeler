@@ -1,5 +1,5 @@
 import app from 'ampersand-app';
-import AuthModel from '../helpers/auth-model';
+import AuthModel from '../auth/model';
 import LabelCollection from './label-collection';
 
 export default AuthModel.extend({
