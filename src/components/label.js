@@ -1,6 +1,8 @@
 import React from 'react';
 import ampersandMixin from 'ampersand-react-mixin';
 
+const VALID_HEX_CHARS_REGEX = /[0-9A-F]/ig;
+
 export default React.createClass({
   displayName: 'Label',
   mixins: [ampersandMixin],
@@ -23,11 +25,11 @@ export default React.createClass({
 
   onColorChange({ target }) {
     const color = target.value
-      .slice(1) // remove #
-      .replace(/\W+/g, ''); // remove non-alphanumerics
+      .slice(1)                      // remove #
+      .match(VALID_HEX_CHARS_REGEX); // extract only valid hex values
 
     this.setState({
-      color,
+      color: color ? color.join('') : '',
     });
   },
 
@@ -51,7 +53,8 @@ export default React.createClass({
 
   onDeleteClick(event) {
     event.preventDefault();
-    this.props.label.destroy(); // can pass { wait: true } which means don't remove this label until the DELETE is successful
+    // can pass { wait: true } which means don't remove this label until the DELETE is successful
+    this.props.label.destroy();
   },
 
   onSubmit(event) {
@@ -76,7 +79,7 @@ export default React.createClass({
     const { label } = this.props;
     const { name, color } = this.state;
     const backgroundColor = `#${color}`;
-    const cannotSave = !name || color.length < 3;
+    const cannotSave = name.length === 0 || !(color.length === 3 || color.length === 6);
 
     let content;
     if (label.isEditing) {
@@ -104,7 +107,7 @@ export default React.createClass({
             disabled={cannotSave}
             className="button button-small button-approve"
           >
-            Save
+            &nbsp;Save&nbsp;
           </button>
           <button
             type="button"
