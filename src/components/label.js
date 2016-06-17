@@ -73,7 +73,7 @@ export default React.createClass({
     const { label } = this.props;
     const { name, color } = this.state;
     const backgroundColor = `#${color}`;
-    const cannotSave = !name || !color;
+    const cannotSave = !name || color.length < 3;
 
     let content;
     if (label.isEditing) {
@@ -92,6 +92,7 @@ export default React.createClass({
           />
           <input
             name="color"
+            maxLength="7"
             value={backgroundColor}
             onChange={this.onColorChange}
           />
