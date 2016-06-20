@@ -4,6 +4,11 @@ import ampersandMixin from 'ampersand-react-mixin';
 export default React.createClass({
   displayName: 'Layout',
 
+  propTypes: {
+    user: React.PropTypes.object.isRequired,
+    children: React.PropTypes.element.isRequired,
+  },
+
   mixins: [ampersandMixin],
 
   render() {
@@ -15,7 +20,7 @@ export default React.createClass({
     const {
       html_url: repoUrl,
       avatar_url: avatarUrl,
-      login: userName
+      login: userName,
     } = user;
 
     return (
