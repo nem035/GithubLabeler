@@ -2,12 +2,9 @@ import app from 'ampersand-app';
 import Router from './router';
 import User from './models/user';
 
-import styles from './styles/main.styl';
-import icons from 'octicons/octicons/octicons.css';
-
-const {
-  localStorage: cache
-} = window;
+// webpack will import the styles for us
+require('./styles/main.styl');
+require('octicons/octicons/octicons.css');
 
 // initialize the app singleton
 app.extend({
@@ -21,7 +18,7 @@ app.extend({
     // and install routing logic
     this.router = new Router();
     this.router.history.start();
-  }
+  },
 });
 
 app.init();
