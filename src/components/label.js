@@ -5,6 +5,11 @@ const VALID_HEX_CHARS_REGEX = /[0-9A-F]/ig;
 
 export default React.createClass({
   displayName: 'Label',
+
+  propTypes: {
+    label: React.PropTypes.object.isRequired,
+  },
+
   mixins: [ampersandMixin],
 
   getInitialState() {

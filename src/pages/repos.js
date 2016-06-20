@@ -3,6 +3,11 @@ import ampersandMixin from 'ampersand-react-mixin';
 
 export default React.createClass({
   displayName: 'Repos',
+
+  propTypes: {
+    repos: React.PropTypes.array.isRequired,
+  },
+
   mixins: [ampersandMixin],
 
   render() {

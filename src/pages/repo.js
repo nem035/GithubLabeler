@@ -4,6 +4,12 @@ import Label from '../components/label';
 
 export default React.createClass({
   displayName: 'Repo',
+
+  propTypes: {
+    labels: React.PropTypes.array.isRequired,
+    repo: React.PropTypes.object.isRequired,
+  },
+
   mixins: [ampersandMixin],
 
   onNewLabelClick() {

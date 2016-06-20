@@ -5,6 +5,10 @@ import app from 'ampersand-app';
 export default React.createClass({
   displayName: 'NavHelper',
 
+  propTypes: {
+    children: React.PropTypes.element.isRequired,
+  },
+
   onClick(event) {
     const pathName = localLinks.getLocalPathname(event);
     if (pathName) {

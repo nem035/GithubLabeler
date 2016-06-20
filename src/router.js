@@ -38,7 +38,7 @@ export default Router.extend({
     login: 'login',
     'auth/callback?:queryString': 'authCallback',
     logout: 'logout',
-    '*404': 'fourOhFour'
+    '*404': 'fourOhFour',
   },
 
   home() {
@@ -89,5 +89,5 @@ export default Router.extend({
       body="Sorry, nothing here."
       type="alert"
     />);
-  }
+  },
 });
